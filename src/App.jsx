@@ -14,7 +14,7 @@ import Dashboard from "./pages/Dashboard";
 import { useSelector } from "react-redux";
 import ProtectedRoute from "./components/ProtectedRoute";
 import DoctorDashboard from "./pages/DoctorDashboard";
-
+import PrivateRoute from "./components/PrivateRoute";
 const App = () => {
   const { isAuthenticated } = useSelector((state) => state.auth);
   return (
@@ -43,7 +43,7 @@ const App = () => {
         />
 
 
-<Route
+     <Route
           path="/my-appointment"
           element={
             <ProtectedRoute>
@@ -53,11 +53,13 @@ const App = () => {
         />
 
 
-<Route
+      <Route
           path="/doctor-dashboard"
           element={
             <ProtectedRoute>
+
               <DoctorDashboard />
+             
             </ProtectedRoute>
           }
         />

@@ -11,7 +11,8 @@ import SkeletonLoader  from "../components/SkeletonLoader"
 
 
 const Login = () => {
-    const role = useSelector((state) => state.auth.role);
+
+
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,15 +24,22 @@ const Login = () => {
     (state) => state.auth
   );
 
+  const userRole = useSelector((state)=> state.auth.role);
+
+
   const handleLogin = async (e) => {
     e.preventDefault();
     const result = await dispatch(login({ email, password }));
 
-    if (result.type === "auth/login/fulfilled" && role=="patient") {
+
+    if((result.payload.user.role) === userRole){
       navigate("/dashboard"); 
-    }else{
+    }
+    else{
       navigate("/doctor-dashboard"); 
     }
+
+   
   };
   return (
 

@@ -7,7 +7,9 @@ const DoctorDashboard = () => {
 
   const token = useSelector((state) => state.auth.token);
 
-     
+
+
+
   const [appointments, setAppointments] = useState([]);
   const [selectedAppointment, setSelectedAppointment] = useState(null); // To store selected appointment for the modal
   const [modalAction, setModalAction] = useState(""); // To differentiate between "Schedule" or "Cancel"
@@ -33,6 +35,9 @@ const DoctorDashboard = () => {
               }
             );
     
+
+
+
             const allAppointments = response.data.data;
     
             // Calculate counts for each status
@@ -100,6 +105,9 @@ const DoctorDashboard = () => {
             updateData,
             { headers: { Authorization: `${token}` } }
           );
+
+
+
           // Update the state with the new status
           setAppointments((prev) =>
             prev.map((appt) =>

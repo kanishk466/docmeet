@@ -9,7 +9,7 @@ const initialState = {
   isAuthenticated: false,
   isLoading: false,
   error: null,
-  
+  role:null
 };
 
 // Async Thunks for login and register
@@ -55,6 +55,7 @@ const authSlice = createSlice({
       state.user = null;
       state.token = null;
       state.isAuthenticated = false;
+      state.role=null;
      
     },
   },

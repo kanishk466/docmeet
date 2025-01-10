@@ -1,8 +1,14 @@
-# React + Vite
+Frontend Documentation
+Project Overview
+The frontend of the Doctor Appointment project is responsible for providing an intuitive user interface for patients and doctors. Patients can book appointments, view their medical history, and interact with doctors, while doctors can manage their schedules and view patient details.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Features
+User Authentication: Login/Signup for patients and doctors.
+Appointment Booking: Patients can select doctors, view their availability, and book appointments.
+Responsive Design: Optimized for desktops, tablets, and mobile devices.
+Doctor Dashboard: View upcoming appointments and patient details.
+Patient Dashboard: View medical history and manage appointments.
 
-Currently, two official plugins are available:
+Installation and Setup
+Clone the repository:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh

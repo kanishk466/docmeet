@@ -3,6 +3,12 @@ body{
   background: #131619;
 
 }
+
+.react-loading-skeleton {
+  --base-color: #131619 !important;
+  --highlight-color: #1A1D21F5 !important;}
+
+
 .btn-color{
   background-color: #0e1c36;
   color: #fff;
@@ -15,12 +21,60 @@ body{
   object-fit: cover;
 }
 
-
-
-.cardbody-color{
-  background-color: #ebf2fa;
+.form-select{
+  background-color: #212529; /* Bootstrap's dark color */
+  color: #9B9C9E;
 }
+
+
+
+
 
 a{
   text-decoration: none;
+}
+
+
+input[type="text"],input[type="email"],input[type="date"], input[type="password"],textarea {
+
+  background: #1A1D21;
+  border: 1px solid #363A3D ;
+   color:#9B9C9E;
+}
+
+
+textarea {
+
+  background: #1A1D21 !important;
+  border: 1px solid #363A3D !important 
+
+}
+
+label{
+  color: #9B9C9E;
+
+  font-weight: 600;
+
+}
+
+
+
+
+.form-control:focus {
+  color: #FFFFFF ;
+  background: #1A1D21;
+
+
+}
+
+
+input::placeholder {
+  color: red;
+
+}
+
+.btn:hover {
+  color: white;
+  background-color: transparent;
+  border-color: green;
 }

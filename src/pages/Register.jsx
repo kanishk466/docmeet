@@ -31,14 +31,14 @@ const[role , setRole] = useState("patient")
         <div class="col-md-6 offset-md-3">
           <h2 class="text-center text-white mt-5">Register Form</h2>
 
-          <div class="card my-5">
+          <div class="card my-5" style={{background:" #1A1D21F5"}}>
             <form
               class="card-body cardbody-color p-lg-5"
               onSubmit={handleRegister}
             >
               <div class="text-center">
                 <img
-                  src="https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397__340.png"
+                  src="https://images.pexels.com/photos/8376176/pexels-photo-8376176.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
                   class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3"
                   width="200px"
                   alt="profile"
@@ -46,6 +46,8 @@ const[role , setRole] = useState("patient")
               </div>
 
               <div class="mb-3">
+              <label className="form-label">Name</label>
+
                 <input
                   type="text"
                   class="form-control"
@@ -58,6 +60,8 @@ const[role , setRole] = useState("patient")
               </div>
 
               <div class="mb-3">
+              <label className="form-label">Email</label>
+
                 <input
                   type="email"
                   class="form-control"
@@ -70,6 +74,8 @@ const[role , setRole] = useState("patient")
                 />
               </div>
               <div class="mb-3">
+              <label className="form-label">Password</label>
+
                 <input
                   type="password"
                   class="form-control"
@@ -85,7 +91,7 @@ const[role , setRole] = useState("patient")
                   Register
                 </button>
               </div>
-              <div id="emailHelp" class="form-text text-center mb-5 text-dark">
+              <div id="emailHelp" class="form-text text-center mb-5 text-white fw-bolder fs-5">
                 Already have an Account ?{" "}
                 <a class="text-dark fw-bold">
                   <NavLink to="/">Log In</NavLink>

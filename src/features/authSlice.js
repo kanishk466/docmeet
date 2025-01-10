@@ -1,5 +1,6 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
+
 
 // Initial state
 const initialState = {
@@ -8,6 +9,7 @@ const initialState = {
   isAuthenticated: false,
   isLoading: false,
   error: null,
+  
 };
 
 // Async Thunks for login and register
@@ -41,16 +43,19 @@ export const register = createAsyncThunk(
   }
 );
 
+
+
 // Auth Slice
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    logout: (state) => {
+    logout: (state , action) => {
       state.id = null;
       state.user = null;
       state.token = null;
       state.isAuthenticated = false;
+     
     },
   },
   extraReducers: (builder) => {
@@ -66,6 +71,9 @@ const authSlice = createSlice({
         state.id = action.payload.user._id;
 
         state.token = action.payload.token;
+        state.role = action.payload.user.role;
+
+
         state.isAuthenticated = true;
       })
       .addCase(login.rejected, (state, action) => {

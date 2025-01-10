@@ -5,9 +5,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { login } from "../features/authSlice";
 import { useNavigate } from "react-router";
 
+
+
+import SkeletonLoader  from "../components/SkeletonLoader"
+
+
 const Login = () => {
+    const role = useSelector((state) => state.auth.role);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -19,9 +27,10 @@ const Login = () => {
     e.preventDefault();
     const result = await dispatch(login({ email, password }));
 
-    console.log(result.type);
-    if (result.type === "auth/login/fulfilled") {
-      navigate("/dashboard");
+    if (result.type === "auth/login/fulfilled" && role=="patient") {
+      navigate("/dashboard"); 
+    }else{
+      navigate("/doctor-dashboard"); 
     }
   };
   return (
@@ -29,38 +38,25 @@ const Login = () => {
     <>
     {
       isLoading ?(
-        <div class="animate-pulse">
-        <div class="mb-3">
-          <div class="h-4 bg-gray-200 rounded w-1/4"></div>
-          <div class="h-10 bg-gray-200 rounded w-full mt-2"></div>
-          <div class="h-4 bg-gray-200 rounded w-2/3 mt-2"></div>
-        </div>
-        <div class="mb-3">
-          <div class="h-4 bg-gray-200 rounded w-1/4"></div>
-          <div class="h-10 bg-gray-200 rounded w-full mt-2"></div>
-        </div>
-        <div class="mb-3">
-          <div class="h-4 bg-gray-200 rounded w-1/4"></div>
-          <div class="h-4 bg-gray-200 rounded w-1/2 mt-2"></div>
-        </div>
-        <div class="h-10 bg-gray-200 rounded w-1/3 mt-2"></div>
-      </div>
+        <SkeletonLoader/>
       
     ):
 
       (
-        <div class="container">
+        <div class="container" >
         <div class="row">
           <div class="col-md-6 offset-md-3">
-            <h2 class="text-center text-white mt-5">Login Form</h2>
-            <div class="card my-5">
+            <h2 class="text-center text-white mt-5">Hi there, ....</h2>
+            <p class="text-center text-white mt-2">Get Started with Appointments.</p>
+
+            <div class="card my-5" style={{background:" #1A1D21F5"}}>
               <form
                 class="card-body cardbody-color p-lg-5"
                 onSubmit={handleLogin}
               >
                 <div class="text-center">
                   <img
-                    src="https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397__340.png"
+                    src="https://images.pexels.com/photos/8376176/pexels-photo-8376176.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
                     class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3"
                     width="200px"
                     alt="profile"
@@ -68,22 +64,23 @@ const Login = () => {
                 </div>
   
                 <div class="mb-3">
+                <label className="form-label">Email</label>
                   <input
                     type="email"
                     class="form-control"
                     id="Email"
                     aria-describedby="emailHelp"
-                    placeholder="Email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
+
                 <div class="mb-3">
+                <label className="form-label">Password</label>
                   <input
                     type="password"
                     class="form-control"
                     id="password"
-                    placeholder="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
@@ -93,13 +90,13 @@ const Login = () => {
                   <button
                     type="submit"
                     class="btn btn-color px-5 mb-5 w-100"
-                    disabled={isLoading}
+                 
                   >
                     {isLoading ? "Logging in..." : "Login"}
                   </button>
                 </div>
-                <div id="emailHelp" class="form-text text-center mb-5 text-dark">
-                  Not Registered?{" "}
+                <div id="emailHelp" class="form-text text-center mb-5 text-white fw-bolder fs-5">
+                  Not Registered ?{" "}
                   <a class="text-dark fw-bold">
                     <NavLink to="/register">Register</NavLink>
                   </a>

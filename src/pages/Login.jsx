@@ -7,6 +7,8 @@ import { useNavigate } from "react-router";
 
 
 
+
+
 import SkeletonLoader  from "../components/SkeletonLoader"
 
 
@@ -24,7 +26,6 @@ const Login = () => {
     (state) => state.auth
   );
 
-  const userRole = useSelector((state)=> state.auth.role);
 
 
   const handleLogin = async (e) => {
@@ -32,26 +33,34 @@ const Login = () => {
     const result = await dispatch(login({ email, password }));
 
 
-    if((result.payload.user.role) === userRole){
+
+
+
+
+
+    if((result.payload.user.role) === "patient"){
       navigate("/dashboard"); 
-    }
-    else{
+    }else{
       navigate("/doctor-dashboard"); 
     }
 
    
   };
+
+
   return (
 
     <>
     {
       isLoading ?(
+        <>
         <SkeletonLoader/>
-      
+      </>
     ):
 
       (
         <div class="container" >
+         
         <div class="row">
           <div class="col-md-6 offset-md-3">
             <h2 class="text-center text-white mt-5">Hi there, ....</h2>
@@ -94,6 +103,16 @@ const Login = () => {
                     required
                   />
                 </div>
+
+
+
+               
+           
+
+
+
+
+
                 <div class="text-center">
                   <button
                     type="submit"
@@ -103,6 +122,17 @@ const Login = () => {
                     {isLoading ? "Logging in..." : "Login"}
                   </button>
                 </div>
+
+
+                
+ { error &&   <div class="mb-3">
+
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+ <strong>Invalid Credentials</strong> 
+             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+
+</div>}
                 <div id="emailHelp" class="form-text text-center mb-5 text-white fw-bolder fs-5">
                   Not Registered ?{" "}
                   <a class="text-dark fw-bold">

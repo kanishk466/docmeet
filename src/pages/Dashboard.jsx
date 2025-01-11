@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState , useEffect} from 'react'
 import { useNavigate } from "react-router";
 import axios from "axios";
 import { useDispatch } from "react-redux";
@@ -12,6 +12,7 @@ const Dashboard = () => {
 
   const dispatch = useDispatch();
 
+  const [isEditMode, setIsEditMode] = useState(false);
 
   const navigate = useNavigate();
 
@@ -52,101 +53,82 @@ const Dashboard = () => {
     },
   });
 
+  useEffect(() => {
+    const fetchPatient = async () => {
+      try {
+        const response = await axios.get(
+          "https://doctor-appointment-backend-p0ms.onrender.com/api/patient/profile",
+          { headers: { Authorization: `${token}` } }
+        );
+        if (response.data.data) {
+          setFormData(response.data.data); 
+          setIsEditMode(true);
+        }
+      } catch (error) {
+        console.error("Error fetching patient data:", error);
+      }
+    };
 
+    fetchPatient();
+  }, []);
  
 
+  
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
+
+    // Handle nested objects
     const keys = name.split(".");
-    if (keys.length === 1) {
-      setFormData({
-        ...formData,
-        [keys[0]]: value,
+    if (keys.length > 1) {
+      setFormData((prevState) => {
+        let updatedData = { ...prevState };
+        let nestedObject = updatedData;
+        keys.forEach((key, index) => {
+          if (index === keys.length - 1) {
+            nestedObject[key] = value;
+          } else {
+            nestedObject = nestedObject[key];
+          }
+        });
+        return updatedData;
       });
-    } else if (keys.length === 2) {
-      setFormData({
-        ...formData,
-        [keys[0]]: {
-          ...formData[keys[0]],
-          [keys[1]]: value,
-        },
-      });
-    } else if (keys.length === 3) {
-      setFormData({
-        ...formData,
-        [keys[0]]: {
-          ...formData[keys[0]],
-          [keys[1]]: {
-            ...formData[keys[0]][keys[1]],
-            [keys[2]]: value,
-          },
-        },
-      });
+    } else {
+      setFormData({ ...formData, [name]: value });
     }
   };
+
+
+
+ 
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    const endpoint = isEditMode
+      ? "https://doctor-appointment-backend-p0ms.onrender.com/api/update-patient"
+      : "https://doctor-appointment-backend-p0ms.onrender.com/api/patient/register-patient";
 
     try {
-      
-      const response = await axios.post(
-        "https://doctor-appointment-backend-p0ms.onrender.com/api/register-patient",
-        formData,
-        {
-          headers: { Authorization: `${token}` },
-        }
-      );
-      alert("Patient information saved successfully!");
-      setFormData({
-        personalInformation:{   
-          name: "",
-          email: "",
-          phone: "",
-          dateOfBirth: "",
-          gender: "",
-          emergencyContact: "",
-          occupation: "",
-          address: {
-            primary: "",
-            secondary: "",
-            city: "",
-            state: "",
-            zip: ""
-          }
-        },
-     
-        medicalInformation: {
-          primaryCarePhysician: "",
-          insuranceProvider: "",
-          insurancePolicyNumber: "",
-          allergies: "",
-          currentMedication: "",
-          familyMedicalHistory: "",
-          pastMedicalHistory: "",
-        },
-        identification: {
-          idNumber: "",
-          idDocumentPath: "",
-        },
-      })
-
-
+      const response = await axios({
+        method: isEditMode ? "put" : "post",
+        url: endpoint,
+        data: formData,
+        headers: { Authorization: `${token}` },
+      });
+      console.log(response.data.message);
       dispatch(setPatientInfo(response.data.data));
       navigate('/book-appointment')
     } catch (error) {
-      console.log("Error submitting form:", error);
-      alert("Failed to save patient information.");
+      console.error("Error submitting patient data:", error);
+      alert("Failed to submit patient data.");
     }
   };
-
-
 
 
   return (
 <div className="container mt-5">
-      <h2 className="mb-4 text-white-50 fw-bolder">Patient Personal Information</h2>
+      <h2 className="mb-4 text-white-50 fw-bolder">   {isEditMode ? "Update Patient Information" : "Patient Personal Information"}</h2>
       <form onSubmit={handleSubmit}>
         <div className="row mb-3">
           <div className="col-md-6">
@@ -431,7 +413,7 @@ const Dashboard = () => {
 
 
         <button type="submit" className="btn btn-primary w-100 mb-5">
-          Submit
+        {isEditMode ? "Update Information" : "Submit"}
         </button>
       </form>
     </div>

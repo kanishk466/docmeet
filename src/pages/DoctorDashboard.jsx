@@ -37,7 +37,6 @@ const DoctorDashboard = () => {
     
 
 
-
             const allAppointments = response.data.data;
     
             // Calculate counts for each status
@@ -173,9 +172,9 @@ const DoctorDashboard = () => {
             {appointments.map((appointment, index) => (
               <tr key={appointment._id}>
                 <th scope="row">{index}</th>
-                <td>{appointment.doctorId.name}</td>
-                <td>{appointment.patientId.personalInformation.name}</td>
-                <td>{new Date(appointment.appointmentDate).toLocaleString()}</td>
+                <td>{appointment.doctorId?.name}</td>
+                <td>{appointment.patientId?.personalInformation.name}</td>
+                <td>{new Date(appointment.appointmentDate)?.toLocaleString()}</td>
                 <td>
                   <span className={getBadgeClass(appointment.status)}>
                     {appointment.status}

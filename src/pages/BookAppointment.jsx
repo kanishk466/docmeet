@@ -33,7 +33,7 @@ const BookAppointment = () => {
   const fetchPatientProfile = async () => {
     try {
      
-      const response = await axios.get(`https://doctor-appointment-backend-p0ms.onrender.com/api/patient/${id}`, {
+      const response = await axios.get(`https://doctor-appointment-backend-p0ms.onrender.com/api/patient/profile`, {
         headers: { Authorization: `${token}` },
       });
     

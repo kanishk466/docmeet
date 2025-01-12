@@ -117,7 +117,7 @@ const BookAppointment = () => {
 
 
     <div className="container mt-5">
-    <h2 className="mb-4">Book an Appointment</h2>
+    <h2 className="mb-4 text-white-50 fw-bolder">Book an Appointment</h2>
     <form onSubmit={handleFormSubmit}>
       {/* Doctor Selection */}
       <div className="mb-3">
@@ -167,7 +167,7 @@ const BookAppointment = () => {
         <textarea
           id="reasonNotes"
           name="reasonNotes"
-          className="form-control profile-input"
+          className="form-control profile-input text-white-50"
           rows="3"
           value={formData.reasonNotes}
           onChange={handleInputChange}
@@ -183,7 +183,7 @@ const BookAppointment = () => {
         <textarea
           id="notes"
           name="notes"
-          className="form-control profile-input"
+          className="form-control profile-input text-white-50"
           rows="3"
           value={formData.notes}
           onChange={handleInputChange}

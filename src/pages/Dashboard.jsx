@@ -325,7 +325,7 @@ const Dashboard = () => {
           <div className=" col-md-6 mb-3">
           <label className="form-label">Past Medical History</label>
           <textarea
-            className="form-control profile-input"
+            className="form-control profile-input text-white-50"
             name="medicalInformation.pastMedicalHistory"
             value={formData.medicalInformation.pastMedicalHistory}
             onChange={handleChange}
@@ -371,7 +371,7 @@ const Dashboard = () => {
           <div className="col-md-6">
             <label className="form-label">Family Medical History</label>
             <textarea
-              className="form-control profile-input"
+              className="form-control profile-input text-white-50"
               name="medicalInformation.familyMedicalHistory"
               value={formData.medicalInformation.familyMedicalHistory}
               onChange={handleChange}

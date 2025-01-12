@@ -2,11 +2,13 @@ import React,{useState , useEffect} from 'react'
 import axios from 'axios'
 
 import { useSelector , useDispatch } from "react-redux";
+
+import TableSkeleton from "../components/TableSkeleton"
 const DoctorDashboard = () => {
 
 
   const token = useSelector((state) => state.auth.token);
-
+const [isLoading , setIsLoading] = useState(true)
 
 
 
@@ -34,7 +36,7 @@ const DoctorDashboard = () => {
                 headers: { Authorization: `${token}` },
               }
             );
-    
+            setIsLoading(false)
 
 
             const allAppointments = response.data.data;
@@ -126,8 +128,8 @@ const DoctorDashboard = () => {
   return (
     <div className="container mx-auto p-4">
 
-    <h1>Welcome , Admin</h1>
-    <h3>Start day with managing new appointment</h3>
+    <h1 className='text-white-50'>Welcome , Admin.........</h1>
+    <h3 className='text-white-50'>Start day with managing new appointment</h3>
      {/* Cards Section */}
      <div className="row my-lg-5">
             <div className="col-md-4">
@@ -156,55 +158,59 @@ const DoctorDashboard = () => {
             </div>
           </div>
     
-    
-        <table className="table table-dark table-striped">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Doctor</th>
-              <th scope="col">Patient</th>
-              <th scope="col">Date</th>
-              <th scope="col">Status</th>
-              <th scope="col">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {appointments.map((appointment, index) => (
-              <tr key={appointment._id}>
-                <th scope="row">{index}</th>
-                <td>{appointment.doctorId?.name}</td>
-                <td>{appointment.patientId?.personalInformation.name}</td>
-                <td>{new Date(appointment.appointmentDate)?.toLocaleString()}</td>
-                <td>
-                  <span className={getBadgeClass(appointment.status)}>
-                    {appointment.status}
-                  </span>
-                </td>
-                <td>
-                  <button
-                    type="button"
-                    className="btn btn-outline-success"
-                    data-bs-toggle="modal"
-                    data-bs-target="#statusModal"
-                    onClick={() => handleModalOpen(appointment, "Schedule")}
-                  >
-                    Schedule
-                  </button>
-    
-                  <button
-                    type="button"
-                    className="btn btn-outline-light mx-3"
-                    data-bs-toggle="modal"
-                    data-bs-target="#statusModal"
-                    onClick={() => handleModalOpen(appointment, "Cancel")}
-                  >
-                    Cancel
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+    {isLoading ?    <TableSkeleton />   :  (
+
+
+<table className="table table-dark table-striped">
+<thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Doctor</th>
+    <th scope="col">Patient</th>
+    <th scope="col">Date</th>
+    <th scope="col">Status</th>
+    <th scope="col">Actions</th>
+  </tr>
+</thead>
+<tbody>
+  {appointments.map((appointment, index) => (
+    <tr key={appointment._id}>
+      <th scope="row">{index}</th>
+      <td>{appointment.doctorId?.name}</td>
+      <td>{appointment.patientId?.personalInformation.name}</td>
+      <td>{new Date(appointment.appointmentDate)?.toLocaleString()}</td>
+      <td>
+        <span className={getBadgeClass(appointment.status)}>
+          {appointment.status}
+        </span>
+      </td>
+      <td>
+        <button
+          type="button"
+          className="btn btn-outline-success"
+          data-bs-toggle="modal"
+          data-bs-target="#statusModal"
+          onClick={() => handleModalOpen(appointment, "Schedule")}
+        >
+          Schedule
+        </button>
+
+        <button
+          type="button"
+          className="btn btn-outline-light mx-3"
+          data-bs-toggle="modal"
+          data-bs-target="#statusModal"
+          onClick={() => handleModalOpen(appointment, "Cancel")}
+        >
+          Cancel
+        </button>
+      </td>
+    </tr>
+  ))}
+</tbody>
+</table>
+    )}
+      
     
         {/* Modal */}
         <div
@@ -215,7 +221,7 @@ const DoctorDashboard = () => {
           aria-hidden="true"
         >
           <div className="modal-dialog">
-            <div className="modal-content">
+            <div className="modal-content bg-dark text-white-50">
               <div className="modal-header">
                 <h5 className="modal-title" id="statusModalLabel">
                   {modalAction} Appointment
@@ -235,7 +241,7 @@ const DoctorDashboard = () => {
                     </label>
                     <textarea
                       id="cancelReason"
-                      className="form-control"
+                      className="form-control text-white"
                       value={cancelReason}
                       onChange={(e) => setCancelReason(e.target.value)}
                       rows="3"

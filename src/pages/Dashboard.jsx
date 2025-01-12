@@ -57,7 +57,7 @@ const Dashboard = () => {
     const fetchPatient = async () => {
       try {
         const response = await axios.get(
-          "https://doctor-appointment-backend-p0ms.onrender.com/api/patient/profile",
+          "https://doctor-appointment-backend-ebon.vercel.app/api/patient/profile",
           { headers: { Authorization: `${token}` } }
         );
         if (response.data.data) {
@@ -106,8 +106,8 @@ const Dashboard = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const endpoint = isEditMode
-      ? "https://doctor-appointment-backend-p0ms.onrender.com/api/update-patient"
-      : "https://doctor-appointment-backend-p0ms.onrender.com/api/patient/register-patient";
+      ? "https://doctor-appointment-backend-ebon.vercel.app/api/update-patient"
+      : "https://doctor-appointment-backend-ebon.vercel.app/api/patient/register-patient";
 
     try {
       const response = await axios({

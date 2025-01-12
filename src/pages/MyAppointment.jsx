@@ -12,7 +12,7 @@ const MyAppointment = () => {
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
-        const response = await axios.get(`https://doctor-appointment-backend-p0ms.onrender.com/api/appointments/patient/${patientId}`, {
+        const response = await axios.get(`https://doctor-appointment-backend-ebon.vercel.app/api/appointments/patient/${patientId}`, {
           headers: { Authorization: `${token}` },
         });
         setAppointments(response.data.data);

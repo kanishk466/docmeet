@@ -18,7 +18,7 @@ export const login = createAsyncThunk(
   async (credentials, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        "https://doctor-appointment-backend-p0ms.onrender.com/api/auth/login",
+        "https://doctor-appointment-backend-ebon.vercel.app/api/auth/login",
         credentials
       );
       return response.data; // Return the user data and token
@@ -33,7 +33,7 @@ export const register = createAsyncThunk(
   async (userData, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        "https://doctor-appointment-backend-p0ms.onrender.com/api/auth/register",
+        "https://doctor-appointment-backend-ebon.vercel.app/api/auth/register",
         userData
       );
       return response.data; // Return the registered user data

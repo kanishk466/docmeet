@@ -29,7 +29,7 @@ const DoctorDashboard = () => {
           try {
       
             const response = await axios.get(
-              "https://doctor-appointment-backend-p0ms.onrender.com/api/appointments",
+              "https://doctor-appointment-backend-ebon.vercel.app/api/appointments",
               {
                 headers: { Authorization: `${token}` },
               }

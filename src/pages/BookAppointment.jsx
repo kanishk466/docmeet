@@ -33,7 +33,7 @@ const BookAppointment = () => {
   const fetchPatientProfile = async () => {
     try {
      
-      const response = await axios.get(`https://doctor-appointment-backend-p0ms.onrender.com/api/patient/profile`, {
+      const response = await axios.get(`https://doctor-appointment-backend-ebon.vercel.app/api/patient/profile`, {
         headers: { Authorization: `${token}` },
       });
     
@@ -59,7 +59,7 @@ const BookAppointment = () => {
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
-        const response = await axios.get("https://doctor-appointment-backend-p0ms.onrender.com/api/appointments/doctor", {
+        const response = await axios.get("https://doctor-appointment-backend-ebon.vercel.app/api/appointments/doctor", {
           headers: { Authorization: `${token}` },
         });
         setDoctors(response.data);
@@ -90,7 +90,7 @@ const BookAppointment = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://doctor-appointment-backend-p0ms.onrender.com/api/appointments",
+        "https://doctor-appointment-backend-ebon.vercel.app/api/appointments",
         formData,
         {
           headers: { Authorization: `${token}` },

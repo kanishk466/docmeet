@@ -107,7 +107,7 @@ const Dashboard = () => {
     e.preventDefault();
     const endpoint = isEditMode
       ? "https://doctor-appointment-backend-ebon.vercel.app/api/update-patient"
-      : "https://doctor-appointment-backend-ebon.vercel.app/api/patient/register-patient";
+      : "https://doctor-appointment-backend-ebon.vercel.app/api/register-patient";
 
     try {
       const response = await axios({
